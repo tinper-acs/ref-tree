@@ -4,7 +4,7 @@
 
 ## 代码演示
 ```sh
-$ npm install ref-tree --save
+$ npm install ref-tree@2.0.0-beta.0 --save
 ```
 
 ```javascript
