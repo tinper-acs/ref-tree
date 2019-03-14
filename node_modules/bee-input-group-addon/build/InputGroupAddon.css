@@ -1,0 +1,22 @@
+/* FormGroup */
+/*  Navlayout  */
+.u-input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #505F79;
+  text-align: center;
+  border-radius: 3px;
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+  display: table-cell; }
+  .u-input-group-addon:last-child {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+  .u-input-group-addon:first-child {
+    border-right: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; }
