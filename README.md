@@ -435,7 +435,7 @@ onCancel | `function()` | -- | 参照取消的回调，会更新showModal关闭,
 checkedArray | `Array` | [] | 传给树选中的节点| 否
 onMatchInitValue| `function(value)` | onMatchInitValue = (checkedArray) => {this.setState({checkedArray})} | 更改checkedArray | 否
 
-> RefWithInput提供的参数可以保证参照组件的checkedArray更新以及参照showModal关闭打开，因此在使用RefWithInput就需要额外手动维护这两个参数
+> <span style="color: red; font-size: 15px;">RefWithInput提供的参数可以保证参照组件的checkedArray更新以及参照showModal关闭打开，因此在使用RefWithInput就需要额外手动维护这两个参数</span>
 
 
 
