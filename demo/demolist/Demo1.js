@@ -35,6 +35,7 @@ const option = {
     lazyModal: false,
     strictMode: true,
     lang: 'zh_CN',
+    emptyBut:true,
     // className:'ref-walsin-modal'
 };
 // createRefTree({...option, showModal: true})

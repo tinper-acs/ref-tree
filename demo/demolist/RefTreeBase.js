@@ -58,12 +58,10 @@ class RefTreeBase extends Component {
 		const { checkedArray, valueField } = props;
 		this.state = {
 			showLoading:false,
-			selectedArray: checkedArray || [], //  记录保存的选择项
+			// selectedArray: checkedArray || [], //  记录保存的选择项
 			checkedKeys: checkedArray.map(item=>{
 				return item[valueField];
 			}),
-			expandedKeys: [],
-			onSaveCheckItems: [],
 			isAfterAjax: false,
 			showLoading: false
 		};
@@ -89,7 +87,7 @@ class RefTreeBase extends Component {
 			//20190124因為不再走constructor，导致checkedKeys和selectedArray不一致
 			if(checkedArray.length>0){
 				this.setState({
-					selectedArray: checkedArray || [], //  记录保存的选择项
+					// selectedArray: checkedArray || [], //  记录保存的选择项
 					checkedKeys: checkedArray.map(item=>{
 						return item[valueField];
 					}),
@@ -121,7 +119,7 @@ class RefTreeBase extends Component {
 				}
 				this.setState({
 					checkedArray: data,
-					selectedArray: data,
+					// selectedArray: data,
 					showLoading: false,
 					checkedKeys: data.map(item=>{
 						return item.refpk;
@@ -130,7 +128,7 @@ class RefTreeBase extends Component {
 			}).catch(()=>{
 				this.setState({
 					checkedArray: [],
-					selectedArray: [],
+					// selectedArray: [],
 					showLoading: false,
 					checkedKeys: []
 				});
@@ -139,7 +137,7 @@ class RefTreeBase extends Component {
 			//当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
 			this.setState({
 				checkedArray: [valueMap],
-				selectedArray: [valueMap],
+				// selectedArray: [valueMap],
 				showLoading: false,
 				checkedKeys: valueMap.refpk.split(',')
 			});
@@ -171,11 +169,11 @@ class RefTreeBase extends Component {
 				this.setState({
 					showLoading: false
 				});
-				if (data[0].id) {
-					this.setState({
-						expandedKeys: [data[0].id],
-					});
-				}
+				// if (data[0].id) {
+				// 	this.setState({
+				// 		expandedKeys: [data[0].id],
+				// 	});
+				// }
 			} else {
 				this.treeData = [];
 				this.setState({
@@ -252,14 +250,11 @@ class RefTreeBase extends Component {
 
 	
 	render() {
-		const {showLoading,selectedArray,checkedKeys,expandedKeys,onSaveCheckItems } = this.state;
+		const {showLoading,checkedKeys } = this.state;
 		let childrenProps = Object.assign({},this.props,{
 			treeData:this.treeData,
 			showLoading:showLoading,
-			selectedArray: selectedArray, //  记录保存的选择项
 			checkedKeys: checkedKeys,
-			expandedKeys: expandedKeys,
-			onSaveCheckItems: onSaveCheckItems,
 		});
 		return (
 			<RefTreeBaseUI {...childrenProps}/>

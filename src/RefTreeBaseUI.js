@@ -35,7 +35,7 @@ const propTypes = {
   getRefTreeData: PropTypes.func,
   multiple: PropTypes.bool, //  默认单选
   checkedArray: PropTypes.array,
-
+  treeData: PropTypes.array,//接收树的数据
 };
 const defaultProps = {
   title: '弹窗标题',
@@ -50,19 +50,19 @@ const defaultProps = {
 	onCancel: noop,
 	onSave: noop,
   lang: 'zh_CN',
-  nodeDisplay:'{refname}'
+  nodeDisplay:'{refname}',
+  treeData:[],
 }
 class RefTreeBaseUI extends Component {
   constructor(props) {
     super(props);
-    const { checkedArray, valueField ,expandedKeys,onSaveCheckItems,showLoading} = props;
+    const { checkedArray, valueField,showLoading} = props;
     this.state = {
       selectedArray: checkedArray || [], //  记录保存的选择项
       checkedKeys: checkedArray.map(item => {
         return item[valueField];
       }),
-      expandedKeys: expandedKeys,
-      onSaveCheckItems: onSaveCheckItems,
+      onSaveCheckItems:[],
       showLoading: showLoading
     };
 
