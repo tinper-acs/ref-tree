@@ -386,7 +386,6 @@ export default RefTreeBase;
 ---|---|--- | --- | ---
 className |`string`|空 | 参照class样式，作用于弹出层的样式，默认为空。 | 否
 title |``string``|空 |打开上传的模态框显示的标题文字 | 否
-className |`string`|空 | 参照class样式，作用sh于弹出层的样式，默认为空。'ref-walsin-modal'参照使用另外一种风格 | 否
 showLoading | `bool` | false | 是否展示loading，多用于请求中| 否
 backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显示 | 否
 lang|`string`| `zh_TW` |多语配置，详情查看参数详解 | 否
@@ -398,7 +397,6 @@ checkStrictly| `bool` | checkable状态下节点选择完全受控（父子节�
 multiple |`bool`| false |是否单选， true 多选，false 单选， 同时多选时不会有确认和取消按钮，多选时会出现复选框 | 否
 searchable |`bool`|true |是否显示搜索框，弹出层是否带有搜索框，true 显示，false 不显示。 | 否
 defaultExpandAll |`bool`|false |展开所有节点 true 展开，false 不展开 | 否
-nodeDisplay |<code>string 或 function</code>|'{refname}' |指定树节点渲染内容。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}。是树节点展示的内容| 否
 treeData | `Array` | []| 树参照数据 | 否
 showModal | `bool` | false | 是否展示参照 ，true显示，false不显示(span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)| 否
 onSave | `function(value)` | -- | 参照确定的回调(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)| 否
