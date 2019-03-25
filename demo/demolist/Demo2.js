@@ -11,7 +11,7 @@ import { Button, Form } from 'tinper-bee';
 const option = {
     title: '树',
     searchable: true,
-    multiple: true,
+    multiple: false,
     param: {
         "refCode":"neworganizition_tree",
     },

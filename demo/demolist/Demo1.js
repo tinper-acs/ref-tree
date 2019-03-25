@@ -8,7 +8,6 @@
 import React, { Component } from 'react';
 import RefWithInput from 'ref-core/lib/refs/refcorewithinput.js';
 import RefTreeBaseUI from '../../src/RefTreeBaseUI';
-import RefTreeBase from './RefTreeBase';
 import  'ref-core/lib/refs/refcorewithinput.css';
 import { Button, Form } from 'tinper-bee';
 const option = {
@@ -71,7 +70,7 @@ class Demo1 extends Component {
                         }]
                     })}
                 >
-                    <RefTreeBase />
+                    <RefTreeBaseUI />
                 </RefWithInput>
                 
                 <Button  
