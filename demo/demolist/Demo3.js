@@ -1,7 +1,7 @@
 /**
  *
  * @title 树组件，没有input框
- * @description 树组件，没有input框
+ * @description 树组件，没有input框，只有RefTreeBaseUI
  *
  */
 

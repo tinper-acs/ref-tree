@@ -1,7 +1,7 @@
 /**
  *
- * @title 树组件，带有input框，使用封装完成的RefTreeWidthInput
- * @description 树组件，带有input框,同RefTreeWidthInput
+ * @title 树组件，带有input框
+ * @description 树组件，带有input框,使用RefTreeWithInput
  *
  */
 
