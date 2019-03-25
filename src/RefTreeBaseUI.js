@@ -94,11 +94,12 @@ class RefTreeBaseUI extends Component {
   }
 
   initComponent = () => {
-    let {matchData,valueField,value,treeData} = this.props;
+    let {matchData=[],checkedArray,value,treeData} = this.props;
     this.treeData = treeData;
     //当有已选值，不做校验，即二次打开弹出层不做校验
-		let valueMap = refValParse(value)
-    if(matchData){
+    let valueMap = refValParse(value)
+		if(checkedArray.length != 0 || !valueMap.refpk) return;
+    if(matchData.length>0){
 			this.setState({
         checkedArray: matchData,
         selectedArray: matchData,
