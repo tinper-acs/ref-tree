@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { is } from 'immutable';
+import { refValParse } from './utils';
 import RefCoreError from 'ref-core/lib/refs/RefCoreError';
 import RefCoreTree from 'ref-core/lib/refs/RefCoreTree';
 import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
@@ -69,19 +69,55 @@ class RefTreeBaseUI extends Component {
     this.treeData = props.treeData;
   }
 
-  componentWillReceiveProps(nextProps,nextState) {
-    let { checkedArray, valueField } = nextProps;
-    if(!is(nextState, this.state)){
-      this.treeData = nextProps.treeData;
-      this.setState({
-        selectedArray: checkedArray || [], //  记录保存的选择项
-        checkedKeys: checkedArray.map(item => {
-          return item[valueField];
-        }),
-      })
-    }
-    
+  componentWillReceiveProps(nextProps) {
+		let { strictMode,checkedArray,valueField } = nextProps;
+		//严格模式下每次打开必须重置数据
+		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
+			if( strictMode || !this.treeData.length ) {
+				//开启严格模式 
+				this.setState({
+					showLoading: true
+				},() => {
+					this.initComponent();
+				});
+			}
+			//20190124因為不再走constructor，导致checkedKeys和selectedArray不一致
+			if(checkedArray.length>0){
+				this.setState({
+					selectedArray: checkedArray || [], //  记录保存的选择项
+					checkedKeys: checkedArray.map(item=>{
+						return item[valueField];
+					}),
+				})
+			}
+		}
   }
+
+  initComponent = () => {
+    let {matchData,valueField,value,treeData} = this.props;
+    this.treeData = treeData;
+    //当有已选值，不做校验，即二次打开弹出层不做校验
+		let valueMap = refValParse(value)
+    if(matchData){
+			this.setState({
+        checkedArray: matchData,
+        selectedArray: matchData,
+        showLoading: false,
+        checkedKeys: matchData.map(item=>{
+          return item.refpk;
+        })
+      });
+		}else{
+			//当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
+			this.setState({
+				checkedArray: [valueMap],
+				selectedArray: [valueMap],
+				showLoading: false,
+				checkedKeys: valueMap.refpk.split(',')
+			});
+		}
+  }
+  
   //  tree EventHandler
 	onCheck(selectedKeys, event) {
 		const { multiple } = this.props;
