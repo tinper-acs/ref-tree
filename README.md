@@ -51,10 +51,10 @@ onCancel | `function(value)` | -- | 参照取消的回调(<span style="color: re
 value| ``string``|空|默认值，RefWithInput和参照组件都会使用，可以初始化树选中的节点。例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
 matchData | `Array` | [] | 传给树选中的节点(<span style="color: red; font-size: 15px;">macthData优先，其次是value</span>)| 否
 
-## RefWithInput  API
+### RefWithInput  API
 <span style="color: red; font-size: 15px;">注意：RefWithInput（ref-core）可以和RefTreeBaseUI配套使用，下面是RefWithInput可以接收的参数，以及RefWithInput给RefTreBaseUI提供的参数</span>
 
-### RefWithInput接收的参数
+#### RefWithInput接收的参数
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
@@ -70,7 +70,7 @@ onChange|`function(values, record)`|--|value改变、快捷录入和保存时数
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
 
-### RefWithInput提供的参数
+#### RefWithInput提供的参数
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
@@ -86,21 +86,20 @@ onMatchInitValue| `function(value)` | onMatchInitValue = (checkedArray) => {this
  > RefCoreWithInput使用value来展示input的值，参照组件使用matchData来初始化选中节点，若matchData为空，使用value来初始化参照中checkedArray（树组件可以，表不可以）
 
 > 注意：modalShow在refcorewithinput中有提供。因此若是refcorewithinput和refmultipletablebaseui配合使用，注意showModal onSave onCancel
-## 树形参照分类
 
 ### RefTreeBaseUI
     
-树的通用ui，只有一个树组件
+    树的通用ui，只有一个树组件
 
 ### RefTree
 
-参照弹出窗，没有输入框，使用时可根据自己需要定义具体的文本框。实质是RefCoreGlobal和RefTreeBaseUI的组合
+    参照弹出窗，没有输入框，使用时可根据自己需要定义具体的文本框。实质是RefCoreGlobal和RefTreeBaseUI的组合
 
 ### RefTreeWithInput
-  带文本框的参照弹出窗。在 RefTree 基础上封装实现，RefWithInput和 RefTree组合。
+     带文本框的参照弹出窗。在 RefTree 基础上封装实现，RefWithInput和 RefTree组合。
   
 ### createRefTree
-  非 ReactJS 调用方式，与 RefTree 相同没有输入框，使用时可根据自己需要定义具体的文本框。
+     非 ReactJS 调用方式，与 RefTree 相同没有输入框，使用时可根据自己需要定义具体的文本框。
   
 ### createRefTreeWithInput
     非 ReactJS 调用方式，与  RefTreeTableWithInput 相同带文本框的参照弹出窗。
