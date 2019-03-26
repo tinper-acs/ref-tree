@@ -1,6 +1,6 @@
 /**
  *
- * @title 树组件，带有input框
+ * @title 使用RefTreeWithInput
  * @description 树组件，带有input框,使用RefTreeWithInput
  *
  */

@@ -1,6 +1,6 @@
 /**
  *
- * @title 树组件，没有input框
+ * @title 只有RefTreeBaseUI
  * @description 树组件，没有input框，只有RefTreeBaseUI
  *
  */
