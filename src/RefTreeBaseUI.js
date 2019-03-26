@@ -68,18 +68,21 @@ class RefTreeBaseUI extends Component {
 
     this.treeData = props.treeData;
   }
-
+  // shouldComponentUpdate(nextProps, nextState){
+	// 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
+	// }
   componentWillReceiveProps(nextProps) {
 		let { strictMode,checkedArray,valueField } = nextProps;
 		//严格模式下每次打开必须重置数据
 		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
 			if( strictMode || !this.treeData.length ) {
 				//开启严格模式 
-				this.setState({
-					showLoading: true
-				},() => {
-					this.initComponent();
-				});
+				// this.setState({
+				// 	showLoading: true
+				// },() => {
+				// 	this.initComponent();
+        // });
+        this.initComponent();
 			}
 			//20190124因為不再走constructor，导致checkedKeys和selectedArray不一致
 			if(checkedArray.length>0){
@@ -95,7 +98,6 @@ class RefTreeBaseUI extends Component {
 
   initComponent = () => {
     let {matchData=[],checkedArray,value,treeData} = this.props;
-    this.treeData = treeData;
     //当有已选值，不做校验，即二次打开弹出层不做校验
     let valueMap = refValParse(value)
 		if(checkedArray.length != 0 || !valueMap.refpk) return;
@@ -265,8 +267,10 @@ class RefTreeBaseUI extends Component {
       nodeDisplay = "{refname}",
       buttons,
       emptyBut,
-      multiple
+      multiple,
+      treeData,
     } = this.props;
+    this.treeData = treeData;
     const { checkedKeys } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return (
