@@ -143,12 +143,11 @@ searchable |`bool`|true |是否显示搜索框，弹出层是否带有搜索框�
 defaultExpandAll |`bool`|false |展开所有节点 true 展开，false 不展开 | 否
 nodeDisplay |<code>string 或 function</code>|'{refname}' |指定树节点渲染内容。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}。是树节点展示的内容| 否
 treeData | `Array` | []| 树参照数据 | 否
-showModal | `bool` | false | 是否展示参照 ，true显示，false不显示(span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)| 否
+showModal | `bool` | false | 是否展示参照 ，true显示，false不显示(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)| 否
 onSave | `function(value)` | -- | 参照确定的回调(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)| 否
 onCancel | `function(value)` | -- | 参照取消的回调(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)| 否
 value| ``string``|空|默认值，RefWithInput和参照组件都会使用，可以初始化树选中的节点。例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
 matchData | `Array` | [] | 传给树选中的节点(<span style="color: red; font-size: 15px;">macthData优先，其次是value</span>)| 否
-
 
 ## RefWithInput  API
 <span style="color: red; font-size: 15px;">注意：RefWithInput（ref-core）可以和RefTreeBaseUI配套使用，下面是RefWithInput可以接收的参数，以及RefWithInput给RefTreBaseUI提供的参数</span>
@@ -176,12 +175,17 @@ canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录�
 showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 否
 onSave | `function(value)` | -- | 参照确定的回调，会更新checkedArray，showname（input的value），showModal关闭,最后回调RefWithInput接收的参数onSave| 否
 onCancel | `function()` | -- | 参照取消的回调，会更新showModal关闭,最后回调RefWithInput接收的参数onCancel| 否
-checkedArray | `Array` | [] | 传给树选中的节点| 否
+checkedArray | `Array` | [] | 传给参照选中的节点，所以参照中选中节点通过value和matchData来控制| 否
 onMatchInitValue| `function(value)` | onMatchInitValue = (checkedArray) => {this.setState({checkedArray})} | 更改checkedArray | 否
 
-> RefWithInput提供的参数可以保证参照组件的checkedArray更新以及参照showModal关闭打开，因此在使用RefWithInput就需要额外手动维护这两个参数
+## 注意事项
+ > RefCoreWithInput提供的参数可以保证参照组件showModal关闭打开，因此在使用RefCoreWithInput就不需要额外手动维护showModal
+ 
+ > RefCoreWithInput使用value来展示input的值，参照组件使用matchData来初始化选中节点，若matchData为空，使用value来初始化参照中checkedArray（树组件可以，表不可以）
 
+> 注意：modalShow在refcorewithinput中有提供。因此若是refcorewithinput和refmultipletablebaseui配合使用，注意showModal onSave onCancel
 ## 树形参照分类
+
 
 ### RefTreeBaseUI
     
