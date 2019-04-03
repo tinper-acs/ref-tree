@@ -2,7 +2,7 @@
 
 
 ## 何时使用
->单选多选树形参照通用ui
+> 单选多选树形参照通用ui
 
 
 ## 如何使用
@@ -57,12 +57,12 @@ treeData | `Array` | []| 树参照数据 | 否
 showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 否
 onSave | `function(value)` | -- | 参照确定的回调| 否
 onCancel | `function(value)` | -- | 参照取消的回调| 否
-value| ``string``|空|默认值，RefWithInput和参照组件都会使用，可以初始化树选中的节点。例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
-matchData | `Array` | [] |传给树选中的节点，matchData的优先级高于value| 否
+value| ``string``|空|默认值，当matchData为空时，可以初始化选中的节点。例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
+matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，在选中节点从matchData中获取| 否
 
 ### RefTreeWithInput
 
-除了使用上述<RefTreeBaseUI/>的参数还有
+除了使用上述<RefTreeBaseUI/>的参数（showModal不可使用）还有
 以下参数。下面的参数是 <RefTreeWithInput/>独有。对<RefTreeBaseUI/>使用无效
 
 参数 | 类型 |默认值| 说明 | 必选
