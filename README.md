@@ -2,13 +2,13 @@
 
 
 ## 何时使用
-> 单选多选树形参照通用ui
+> 单选多选树形参照
 
 
 ## 如何使用
 
 ```
-$ ynpm install ref-tree@2.0.0-beta.2 --save
+$ ynpm install ref-tree@2.0.0-beta.0 --save
 
 引入
 
@@ -27,11 +27,11 @@ import 'ref-tree/dist/index.css';
 
 ### RefTreeBaseUI
     
-    树的通用ui，只有一个树组件
+    树参照通用ui
 
 
 ### RefTreeWithInput
-     带文本框的参照弹出窗。
+     带文本框的树参照弹出窗。
   
     
 ## API
@@ -67,18 +67,17 @@ matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
-wrapClassName|`string`|空 |input框的class样，默认为空。 | 否
-placeholder|`string`| 空 |input框的 placeholder | 否
+wrapClassName|`string`|空 | 文本框的class样，默认为空。 | 否
+placeholder|`string`| 空 |文本框的 placeholder | 否
 style| `object`| {width:200}| 文本框的style，默认宽度200px | 否 
 filterUrl| `string`|空|快捷录入接口。|否
-displayField |<code>string 或 function</code>|'{refname}' |记录中显示的键。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：displayField:'{refname}'<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
+displayField |<code>string 或 function</code>|'{refname}' |记录中显示的键。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
 valueField |``string``|'refcode' |待提交的 value 的键。 | 否
-value| ``string``|空|默认值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
+value| ``string``|空|默认值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。初始化input框值，搭配上面的matchData初始化表格选中数据|否
 disabled|`bool`| false |禁用整个参照 | 否
 onChange|`function(values, record)`|--|value改变、快捷录入和保存时数据回调|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
-
 
 
 ## 更新日志
