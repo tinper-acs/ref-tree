@@ -12,9 +12,6 @@ const option = {
     title: '树',
     searchable: true,
     multiple: false,
-    param: {
-        "refCode":"neworganizition_tree",
-    },
     checkStrictly: true,
     disabled: false,
     nodeDisplay: (record) => {
@@ -24,12 +21,6 @@ const option = {
         return record.refname
     },//显示内容的键
     valueField: 'refpk',//真实 value 的键
-    refModelUrl: {
-        treeUrl:'https://mock.yonyoucloud.com/mock/358/blobRefTree',
-        treeUrl: '/pap_basedoc/common-ref/blobRefTree',
-    },
-    matchUrl: '/pap_basedoc/common-ref/matchPKRefJSON',
-    filterUrl: '/pap_basedoc/common-ref/filterRefJSON',
     lazyModal: false,
     strictMode: true,
     lang: 'zh_CN',
