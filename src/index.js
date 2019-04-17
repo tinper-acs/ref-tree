@@ -1,11 +1,10 @@
 import React from 'react';
 import RefTreeBaseUI from './RefTreeBaseUI';
-import RefWithInput from 'ref-core/lib/refs/refcorewithinput.js';
-import  'ref-core/lib/refs/refcorewithinput.css';
+import RefWithInput from 'ref-core/lib/refs/RefCoreWithInput';
 import {createRefModal, createRefInput} from 'ref-core/lib/utils/createApi.js';
-import RefCoreGlobal from 'ref-core/lib/refs/refcoreglobal';
+import RefCoreGlobal from 'ref-core/lib/refs/RefCoreGlobal';
 import 'ref-core/css/refcore.css';
-
+import './index.less';
 const RefTree = (props) =>{
     return (
         <RefCoreGlobal {...props}>

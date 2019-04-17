@@ -5,13 +5,8 @@ import RefCoreError from 'ref-core/lib/refs/RefCoreError';
 import RefCoreTree from 'ref-core/lib/refs/RefCoreTree';
 import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
 import RefCoreButton from 'ref-core/lib/refs/RefCoreButton';
-import  'ref-core/lib/refs/refcoreerror.css';
-import  'ref-core/lib/refs/refcoretree.css';
-import  'ref-core/lib/refs/refcoresearch.css';
-import  'ref-core/lib/refs/refcorebutton.css';
 import Loading from 'bee-loading';
 import Modal from 'bee-modal';
-import './index.less';
 const noop = () => {
 };
 const propTypes = {
