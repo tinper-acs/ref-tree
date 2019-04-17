@@ -1,0 +1,41 @@
+.ref-walsin-modal .u-checkbox.is-checked .u-checkbox-label:before {
+  box-shadow: inset 0 0 0 10px #004898;
+  border-color: #004898;
+}
+.ref-walsin-modal .u-checkbox.u-checkbox-indeterminate .u-checkbox-label:before {
+  box-shadow: inset 0 0 0 10px #004898;
+  border-color: #004898;
+}
+.ref-walsin-modal .u-modal-body {
+  min-height: 419px;
+}
+.ref-walsin-modal .u-modal-footer .u-button {
+  background-color: #004898;
+  border-color: #004898;
+  color: #fff;
+  height: 30px;
+  line-height: 1;
+  font-size: 14px;
+}
+.ref-walsin-modal .u-modal-footer .u-button.ref-core-button-empty {
+  color: #004898;
+}
+.ref-walsin-modal .u-modal-footer .u-button:first-child {
+  margin-right: 10px;
+}
+.ref-walsin-modal .u-modal-footer .u-button:hover {
+  background-color: #0052CC;
+}
+.ref-walsin-modal .u-modal-footer-hide {
+  display: none;
+}
+.ref-walsin-modal .u-modal-footer .ref-core-button {
+  text-align: left;
+}
+.ref-walsin-modal .ref-core-tree {
+  margin-top: 5px;
+}
+.ref-walsin-modal .ref-core-tree .u-tree-checkbox-checked .u-tree-checkbox-inner {
+  background-color: #004898;
+  border-color: #004898;
+}
