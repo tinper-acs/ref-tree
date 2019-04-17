@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import {RefTreeWithInput} from'../../src/index.js';
+import '../../src/index.less';
 import { Button, Form } from 'tinper-bee';
 const option = {
     title: '树',

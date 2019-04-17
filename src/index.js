@@ -5,7 +5,7 @@ import {createRefModal, createRefInput} from 'ref-core/lib/utils/createApi.js';
 import RefCoreGlobal from 'ref-core/lib/refs/RefCoreGlobal';
 import 'ref-core/css/refcore.css';
 import './theme-red.css';
-import './index.less';
+// import './index.less';
 const RefTree = (props) =>{
     return (
         <RefCoreGlobal {...props}>
