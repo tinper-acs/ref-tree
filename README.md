@@ -63,6 +63,7 @@ value| ``string``|空|默认值，当matchData为空时，可以初始化选中�
 matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，在选中节点从matchData中获取| 否
 theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
 onLoadData|  `function(treeNode)` | --| 懒加载传个树的回调方法| 否
+getRefTreeData|`function(value)` | --| 搜索的回到方法，value是搜索值| 否
 
 ### RefTreeWithInput
 

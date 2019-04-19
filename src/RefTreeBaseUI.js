@@ -291,13 +291,14 @@ class RefTreeBaseUI extends Component {
         className={`${theme} ${className} ref-core  ref-core-modal ref-tree`}
         backdrop={backdrop}
         onHide={() => this.onClickBtn('cancel')}
+        autoFocus={false}
       >
-        <Loading  container={this}  show={showLoading} showBackDrop={true} loadingType="line" displayType={"block"} />
           <Modal.Header closeButton>
             <Modal.Title > {title} </Modal.Title>
           </Modal.Header >
 
-          <Modal.Body>
+          <Modal.Body ref={(ref)=>this.modalRef = ref}>
+            <Loading  container={this.modalRef}  show={showLoading} />
             <RefCoreSearch
               show={searchable}
               onSearch={this.onSearchClick}
