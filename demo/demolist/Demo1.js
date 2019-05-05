@@ -40,15 +40,13 @@ class Demo1 extends Component {
         super();
         this.state = {
             showModal:false,//如果不配合withinput使用必须手动控制showModal，和onSave函数
-            checkedArray:[],
-            // checkedArray:[{"code":"xd","entityType":"mainEntity","name":"新道-简","pid":"a4cf0601-51e6-4012-9967-b7a64a4b2d47","refcode":"xd","refpk":"b691afff-ea83-4a3f-affa-beb2be9cba52","id":"b691afff-ea83-4a3f-affa-beb2be9cba52","isLeaf":"true","refname":"新道-简"},{"code":"yy3","entityType":"mainEntity","name":"test3","pid":"a4cf0601-51e6-4012-9967-b7a64a4b2d47","refcode":"yy3","refpk":"e75694d9-7c00-4e9e-9573-d29465ae79a9","id":"e75694d9-7c00-4e9e-9573-d29465ae79a9","isLeaf":"true","refname":"test3"}],
-            // value:'{"refname":"xinda","refpk":"1222"}'
+            matchData:[],
         }
     }
     onSave= (result) =>{
         this.setState({
             showModal:false,
-            checkedArray:result
+            matchData:result
         })
     }
     onCancel = () =>{
@@ -63,14 +61,13 @@ class Demo1 extends Component {
 		});
     }
     render() {
-        let {showModal,checkedArray,value} = this.state;
+        let {showModal,matchData,value} = this.state;
         let childrenOptions = Object.assign({},option,{
             showModal,
-            // checkedArray,
             // value,
             onSave:this.onSave,
             onCancel:this.onCancel,
-            matchData:checkedArray,
+            matchData,
             onLoadData:this.onLoadData
         })
         return (

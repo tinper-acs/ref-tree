@@ -57,19 +57,21 @@ gulp.task("pack_lib2", function(cb) {
     });
 });
 
-gulp.task("css_component", function() {
+gulp.task("move_style", function() {
   gulp
     .src([
       path.join(process.cwd(), "./src/theme-red.css"),
+      path.join(process.cwd(), "./src/theme-red.less"),
+      path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(gulp.dest("./lib"));
-  console.log("###### css_component done ######");
+  console.log("###### move_style done ######");
 });
 
-gulp.task("less_component",['css_component'], function() {
+gulp.task("less_component",['move_style'], function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/*.less"),
+      path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
     .pipe(gulp.dest("./lib"));
@@ -80,8 +82,7 @@ gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
 
-gulp.task("lib2", ["clean_lib2","pack_lib2", "less_component"], function() {});
+gulp.task("lib2", ["clean_lib2","pack_lib2"], function() {});
 
-gulp.task('default',['lib2']);
-// gulp.task('default',['theme_src']);
+gulp.task('default',['lib2', "less_component"]);
 
