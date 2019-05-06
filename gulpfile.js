@@ -8,6 +8,7 @@ var babel = require("gulp-babel");
 var sass = require("gulp-sass");
 var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
+var concat = require('gulp-concat');
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -78,11 +79,23 @@ gulp.task("less_component",['move_style'], function() {
   console.log("###### less_component done ######");
 });
 
+//将lib下的index.css合并dist下的index.css生成完成的index.css
+gulp.task("change_dist", function() {
+  gulp
+    .src([
+      path.join(process.cwd(), "./src/index.less"),
+  ])
+    .pipe(less())
+    .pipe(concat('./dist/index.css'))
+    .pipe(gulp.dest("./"));
+  console.log("###### change_dist done ######");
+});
+
 gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
 
 gulp.task("lib2", ["clean_lib2","pack_lib2"], function() {});
 
-gulp.task('default',['lib2', "less_component"]);
+gulp.task('default',['lib2', "less_component",'change_dist']);
 

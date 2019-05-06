@@ -1166,9 +1166,6 @@
 .react-draggable-transparent-selection * {
   pointer-events: none !important;
 }
-.ref-red {
-  @charset "UTF-8";
-}
 .ref-red .u-button {
   background: #eceff1;
   border: 1px solid #eceff1;
