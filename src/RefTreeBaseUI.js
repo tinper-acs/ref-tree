@@ -71,53 +71,33 @@ class RefTreeBaseUI extends Component {
 	// 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
 	// }
   componentWillReceiveProps(nextProps) {
-		let { strictMode,value,valueField,matchData=[] } = nextProps;
-		//严格模式下每次打开必须重置数据
+		//let { strictMode,value,valueField,matchData=[] } = nextProps;
 		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-			if( strictMode || !this.treeData.length) {
-				//开启严格模式 
-				// this.setState({
-				// 	showLoading: true
-				// },() => {
-				// 	this.initComponent();
-        // });
-        this.initComponent();
-			}
-      //20190124因為不再走constructor，导致checkedKeys和selectedArray不一致,20190409baseui不会再走initcomponent但是选中需要添加
-      let valueMap = refValParse(value)
-      if(matchData.length>0 || this.state.checkedKeys.length===0 && valueMap[valueField]){
-        if(matchData.length>0){
-          this.setState({
-            selectedArray: matchData || [], //  记录保存的选择项
-            checkedKeys: matchData.map(item=>{
-              return item[valueField];
-            }),
-          })
-        }else{
-          this.setState({
-            checkedArray: [valueMap],
-            selectedArray: [valueMap],
-            showLoading: false,
-            checkedKeys: valueMap.refpk.split(',')
-          });
-        }
-				
-			}
+      this.initComponent();
 		}
   }
 
   initComponent = () => {
-    let {matchData=[],checkedArray,value,treeData} = this.props;
+    let {matchData=[],checkedArray,value,treeData,valueField} = this.props;
     //当有已选值，不做校验，即二次打开弹出层不做校验
     let valueMap = refValParse(value)
-		if(checkedArray.length != 0 || !valueMap.refpk) return;
+    // if(checkedArray.length != 0 || !valueMap.refpk) return;
+    if(!valueMap[valueField] && matchData.length === 0){
+      this.setState({
+				checkedArray: [],
+				selectedArray: [],
+				showLoading: false,
+				checkedKeys: []
+      });
+      return false;
+    }
     if(matchData.length>0){
 			this.setState({
         checkedArray: matchData,
         selectedArray: matchData,
         showLoading: false,
         checkedKeys: matchData.map(item=>{
-          return item.refpk;
+          return item[valueField];
         })
       });
 		}else{
@@ -126,7 +106,7 @@ class RefTreeBaseUI extends Component {
 				checkedArray: [valueMap],
 				selectedArray: [valueMap],
 				showLoading: false,
-				checkedKeys: valueMap.refpk.split(',')
+				checkedKeys: valueMap[valueField].split(',')
 			});
 		}
   }
