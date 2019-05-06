@@ -20,7 +20,7 @@ const option = {
     },
     valueField: 'refpk',//真实 value 的键
     lazyModal: false,
-    strictMode: false,
+    // strictMode: false,
     lang: 'zh_CN',
     lazyModal:true,
     value: JSON.stringify({
@@ -54,7 +54,7 @@ class Demo1 extends Component {
         this.setState({showModal:false});
     }
     onLoadData = (treeNode) =>{
-        console.log('11',treeNode,treeNode.props.eventKey,treeNode.props.attr)
+        // console.log('11',treeNode,treeNode.props.eventKey,treeNode.props.attr)
         return new Promise((resolve) => {
 			this.getRefTreeloadData(treeNode.props.eventKey,treeNode.props.attr)
 			resolve();

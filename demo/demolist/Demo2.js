@@ -44,13 +44,25 @@ class Demo2 extends Component {
         }
     }
     componentDidMount(){
-       
+       setTimeout(() => {
+        option['value'] = '';
+        option["matchData"] = [];
+        this.setState({
+            random:Math.random()
+        })
+       }, 10000);
     }
     getRefTreeData = (value) =>{
         alert(value)
       }
     filterUrlFunc = (value) =>{
         console.log(value);
+    }
+    onSave = (result) =>{
+        option["matchData"] = result;
+        this.setState({
+            random:Math.random()
+        })
     }
     render() {
         const { getFieldProps, getFieldError } = this.props.form;
@@ -60,6 +72,7 @@ class Demo2 extends Component {
                     {...option}
                     getRefTreeData={this.getRefTreeData}
                     theme={'ref-red'}
+                    onSave={this.onSave}
                     // {...getFieldProps('code1', {
                     //     initialValue: JSON.stringify({
                     //         code: "org1",
