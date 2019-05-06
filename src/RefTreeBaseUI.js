@@ -73,16 +73,16 @@ class RefTreeBaseUI extends Component {
   componentWillReceiveProps(nextProps) {
 		//let { strictMode,value,valueField,matchData=[] } = nextProps;
 		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-      this.initComponent();
+      this.initComponent(nextProps);
 		}
   }
 
-  initComponent = () => {
-    let {matchData=[],checkedArray,value,treeData,valueField} = this.props;
+  initComponent = (props) => {
+    let {matchData=[],checkedArray,value,treeData,valueField} = props;
     //当有已选值，不做校验，即二次打开弹出层不做校验
     let valueMap = refValParse(value)
     // if(checkedArray.length != 0 || !valueMap.refpk) return;
-    if(!valueMap[valueField] && matchData.length === 0){
+    if(!valueMap[valueField] && props.value !== this.props.value){
       this.setState({
 				checkedArray: [],
 				selectedArray: [],
@@ -101,10 +101,17 @@ class RefTreeBaseUI extends Component {
         })
       });
 		}else{
-			//当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
+      //当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
+      //数据多个
+      let values = [];
+      let names = valueMap.refname.split(',');
+      valueMap[valueField].split(',').forEach((item,i)=>{
+        if(!item) return;
+        values.push({refname:names[i],[valueField]:item})
+      });
 			this.setState({
-				checkedArray: [valueMap],
-				selectedArray: [valueMap],
+				checkedArray: values,
+				selectedArray: values,
 				showLoading: false,
 				checkedKeys: valueMap[valueField].split(',')
 			});
