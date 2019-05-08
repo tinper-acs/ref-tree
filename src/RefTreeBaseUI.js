@@ -30,7 +30,6 @@ const propTypes = {
   emptyBut: PropTypes.bool, //清空按钮
   getRefTreeData: PropTypes.func,
   multiple: PropTypes.bool, //  默认单选
-  checkedArray: PropTypes.array,
   treeData: PropTypes.array,//接收树的数据
   onLoadData:PropTypes.func,
 };
@@ -41,7 +40,6 @@ const defaultProps = {
 	showLine: false, //  默认单选
 	defaultExpandAll: true,  // 数默认展开
 	checkStrictly: false,
-	checkedArray: [], //  指定已选择数据id
 	lazyModal: false,
 	emptyBut: false,
 	onCancel: noop,
@@ -55,10 +53,10 @@ const defaultProps = {
 class RefTreeBaseUI extends Component {
   constructor(props) {
     super(props);
-    const { checkedArray, valueField,showLoading} = props;
+    const { matchData=[], valueField,showLoading} = props;
     this.state = {
-      selectedArray: checkedArray || [], //  记录保存的选择项
-      checkedKeys: checkedArray.map(item => {
+      selectedArray: matchData || [], //  记录保存的选择项
+      checkedKeys: matchData.map(item => {
         return item[valueField];
       }),
       onSaveCheckItems:[],
@@ -78,10 +76,9 @@ class RefTreeBaseUI extends Component {
   }
 
   initComponent = (props) => {
-    let {matchData=[],checkedArray,value,treeData,valueField} = props;
-    //当有已选值，不做校验，即二次打开弹出层不做校验
+    let {matchData=[],value,valueField} = props;
     let valueMap = refValParse(value)
-    // if(checkedArray.length != 0 || !valueMap.refpk) return;
+    //特殊清空操作
     if(!valueMap[valueField] && props.value !== this.props.value){
       this.setState({
 				checkedArray: [],
@@ -101,7 +98,7 @@ class RefTreeBaseUI extends Component {
         })
       });
 		}else{
-      //当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
+      //当时不使用 matchData 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
       //数据多个
       let values = [];
       let names = valueMap.refname.split(',');
