@@ -64,55 +64,30 @@ class RefTreeBaseUI extends Component {
     };
 
     this.treeData = props.treeData;
+    this.inited = false;
   }
   // shouldComponentUpdate(nextProps, nextState){
 	// 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
 	// }
   componentWillReceiveProps(nextProps) {
 		//let { strictMode,value,valueField,matchData=[] } = nextProps;
-		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-      this.initComponent(nextProps);
-		}
+		// if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
+    //   this.initComponent(nextProps);
+    // }
+    this.initComponent(nextProps);
   }
 
   initComponent = (props) => {
     let {matchData=[],value,valueField} = props;
     let valueMap = refValParse(value)
-    //特殊清空操作
-    if(!valueMap[valueField] && props.value !== this.props.value){
-      this.setState({
-				checkedArray: [],
-				selectedArray: [],
-				showLoading: false,
-				checkedKeys: []
-      });
-      return false;
-    }
-    if(matchData.length>0){
-			this.setState({
-        checkedArray: matchData,
-        selectedArray: matchData,
-        showLoading: false,
-        checkedKeys: matchData.map(item=>{
-          return item[valueField];
-        })
-      });
-		}else{
-      //当时不使用 matchData 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
-      //数据多个
-      let values = [];
-      let names = valueMap.refname.split(',');
-      valueMap[valueField].split(',').forEach((item,i)=>{
-        if(!item) return;
-        values.push({refname:names[i],[valueField]:item})
-      });
-			this.setState({
-				checkedArray: values,
-				selectedArray: values,
-				showLoading: false,
-				checkedKeys: valueMap[valueField].split(',')
-			});
-		}
+    this.setState({
+      checkedArray: matchData,
+      selectedArray: matchData,
+      showLoading: false,
+      checkedKeys: matchData.map(item=>{
+        return item[valueField];
+      })
+    });
   }
   
   //  tree EventHandler
