@@ -85,7 +85,7 @@ class Demo2 extends Component {
                         alert(JSON.stringify(values));
                     });
                 }}>提交</Button>
-                <span className='error' style={{display:'block',color:'#f53c32'}}>
+                <span className='error' >
                     {getFieldError('code1')}
                 </span>
             </div>

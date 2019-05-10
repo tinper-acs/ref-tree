@@ -88,7 +88,7 @@ class Demo3 extends Component {
                     colors="primary"
                     onClick={this.clearFunc}>清空选择</Button>
                 <span className='error' style={{display:'block',color:'#f53c32'}}>
-                    {getFieldError('code1')}
+                    {getFieldError('demo3')}
                 </span>
             </div>
         )
