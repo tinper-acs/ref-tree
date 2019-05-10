@@ -46,6 +46,7 @@ const defaultProps = {
 	onSave: noop,
   lang: 'zh_CN',
   nodeDisplay:'{refname}',
+  valueField:'refpk',
   treeData:[],
   onLoadData:()=>{},
   getRefTreeData:()=>{}

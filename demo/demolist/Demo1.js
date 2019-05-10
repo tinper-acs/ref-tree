@@ -7,7 +7,6 @@
 
 import React, { Component } from 'react';
 import RefTreeBaseUI from '../../src/index';
-import  '../../src/index.less';
 import { Button } from 'tinper-bee';
 const option = {
     title: '树',
@@ -50,11 +49,9 @@ class Demo1 extends Component {
         })
     }
     onCancel = () =>{
-        
         this.setState({showModal:false});
     }
     onLoadData = (treeNode) =>{
-        // console.log('11',treeNode,treeNode.props.eventKey,treeNode.props.attr)
         return new Promise((resolve) => {
 			this.getRefTreeloadData(treeNode.props.eventKey,treeNode.props.attr)
 			resolve();
@@ -64,7 +61,6 @@ class Demo1 extends Component {
         let {showModal,matchData,value} = this.state;
         let childrenOptions = Object.assign({},option,{
             showModal,
-            // value,
             onSave:this.onSave,
             onCancel:this.onCancel,
             matchData,
