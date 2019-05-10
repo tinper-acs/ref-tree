@@ -7,7 +7,6 @@ import Clipboard from 'bee-clipboard';
 import './demo.scss'
 
 
-
 {demolist}
 
 class Demo extends Component {
