@@ -96,8 +96,11 @@ canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录�
     displayField确定input中显示内容的格式和过滤列表显示内容的格式
 
 - value、valueFiled
-    value是input需要使用的数据，要求如上。
+    value初始化input框值，是input需要使用的数据，要求如上。
     valueFiled指定数据源的键，要求具有唯一性。
     因此value中refpk指定值应与valueFiled取值一致。
+
+- value、matchData
+    value初始化input框值，matchData是指定参照中选中的节点。如果value有值matchData为空，那么input有值但是参照无选中数据，反之value空值matchData有值，那么input为空但是参照有选中数据
 
 ## 更新日志

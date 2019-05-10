@@ -4,7 +4,7 @@ import { Con, Row, Col } from 'bee-layout';
 import { Panel } from 'bee-panel';
 import Drawer from 'bee-drawer';
 import Clipboard from 'bee-clipboard'; 
-import './demo.scss'
+import './demo.scss';
 
 
 import Demo1 from "./demolist/Demo1";import Demo2 from "./demolist/Demo2";import Demo3 from "./demolist/Demo3";
@@ -48,7 +48,7 @@ class Demo extends Component {
                 <Clipboard action="copy" text={code}/>
             </div>
             <pre className="pre-js">
-                <code className="hljs javascript">{ code }</code>
+                <code className="hljs javascript">{ code.replace('../../src/index.less',COMPONENT+'/lib/index.css').replace('../../src/index.js',COMPONENT).replace('../../src/index',COMPONENT).replace('../../src',COMPONENT)}</code>
             </pre >
             {!!scss_code ?<div className='component-code-copy copy-css'> SCSS代码 
                 <Clipboard action="copy" text={scss_code}/>
