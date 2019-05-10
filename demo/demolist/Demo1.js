@@ -69,7 +69,7 @@ class Demo1 extends Component {
         return (
             <div className="demoPadding">
                  <RefTreeBaseUI {...childrenOptions} />
-                 <Button onClick={()=>{this.setState({showModal:true})}}>打开参照</Button>
+                 <Button colors="primary" onClick={()=>{this.setState({showModal:true})}}>打开参照</Button>
             </div>
         )
     }
