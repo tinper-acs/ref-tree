@@ -57,7 +57,7 @@ showLine | `bool` | false | 是否显示连接线 | 否
 searchable |`bool`|false |是否显示搜索框，弹出层是否带有搜索框，true 显示，false 不显示。 | 否
 lazyModal | `bool`|false | 树参照是异步加载，回调onLoadData | 否
 onLoadData|  `function(treeNode)` | --| 懒加载传个树的回调方法。与lazyModal配合使用，lazyModal=true才会回调该函数| 否
-defaultExpandAll |`bool`|-- | 展开所有节点，true 展开，false 不展开。前提lazyModal是false，懒加载下该属性不起效。| 否
+defaultExpandAll |`bool`|true | 展开所有节点，true 展开，false 不展开。前提lazyModal是false，懒加载下该属性不起效。| 否
 nodeDisplay |<code>string 或 function</code>|'{refname}' |指定树节点渲染内容，这里为了提供根据数据渲染节点图标使用。<br/>当为字符串时则会根据`{}`包裹的正则匹配替换。<br/>如： nodeDisplay:'{refname}'<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}。是树节点展示的内容| 否
 treeData | `Array` | []| 树参照数据 | 否
 showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 否
