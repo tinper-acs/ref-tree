@@ -64,7 +64,7 @@ showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 
 onSave | `function(arr)` | ()=>{} | 参照确定按钮的回调。arr是所有选中节点，数组形式。| 否
 onCancel | `function()` | ()=>{} | 参照取消按钮的回调| 否
 matchData | `Array` | [] | 选中的节点，选中节点只从matchData中获取。matchData是全部选中的数据| 否
-theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
+themeClassName| `String` | 'ref-red' | 启用参照内部默认样式。theme=''，不使用参照默认样式。| 否
 getRefTreeData|`function(value)` | --| 搜索的回调方法，value是搜索值| 否
 valueField |``string``|'refpk' |指定真实数据的键。树节点key也是取valueField指定值 | 否
 

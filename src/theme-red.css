@@ -1172,9 +1172,7 @@
 .react-draggable-transparent-selection * {
   pointer-events: none !important;
 }
-.ref-red {
-  @charset "UTF-8";
-}
+
 .ref-red html {
   -ms-touch-action: manipulation;
   touch-action: manipulation;
