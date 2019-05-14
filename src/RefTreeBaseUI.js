@@ -239,7 +239,7 @@ class RefTreeBaseUI extends Component {
       emptyBut,
       multiple,
       treeData,
-      themeClassName= 'ref-red',
+      theme= 'ref-red',
     } = this.props;
     this.treeData = treeData;
     const { checkedKeys } = this.state;
@@ -248,7 +248,7 @@ class RefTreeBaseUI extends Component {
       <Modal
         show={showModal}
         size="sm"
-        className={`${themeClassName} ${className} ref-core  ref-core-modal ref-tree`}
+        className={`${theme} ${className} ref-core  ref-core-modal ref-tree`}
         backdrop={backdrop}
         onHide={() => this.onClickBtn('cancel')}
         autoFocus={false}
