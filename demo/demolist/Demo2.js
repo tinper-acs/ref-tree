@@ -11,6 +11,7 @@ import '../../src/index.less'
 import { Button, Form } from 'tinper-bee';
 
 const option = {
+    emptyBut:true,
     nodeDisplay: (record) => {
         return record.refname
     },

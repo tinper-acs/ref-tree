@@ -62,16 +62,23 @@ gulp.task("pack_lib2", function(cb) {
 gulp.task("move_style", function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/theme-red.css"),
       path.join(process.cwd(), "./src/theme-red.less"),
       path.join(process.cwd(), "./src/index.less"),
   ])
+    .pipe(gulp.dest("./lib"));
+   console.log("###### move_style done ######");
+});
+gulp.task("css_minify", function() {
+  gulp
+    .src([
+      path.join(process.cwd(), "./src/theme-red.css"),
+  ])
     .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
-  console.log("###### move_style done ######");
+  console.log("###### css_minify done ######");
 });
 
-gulp.task("less_component",['move_style'], function() {
+gulp.task("less_component",['move_style','css_minify'], function() {
   gulp
     .src([
       path.join(process.cwd(), "./src/index.less"),
