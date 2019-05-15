@@ -7,6 +7,7 @@ import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
 import RefCoreButton from 'ref-core/lib/refs/RefCoreButton';
 import Loading from 'bee-loading';
 import Modal from 'bee-modal';
+import shallowEqual from "shallowequal";
 const noop = () => {
 };
 const propTypes = {
@@ -63,26 +64,19 @@ class RefTreeBaseUI extends Component {
       onSaveCheckItems:[],
       showLoading: showLoading
     };
-
-    this.treeData = props.treeData;
-    this.inited = false;
   }
-  // shouldComponentUpdate(nextProps, nextState){
-	// 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
-	// }
+ 
   componentWillReceiveProps(nextProps) {
-		//let { strictMode,value,valueField,matchData=[] } = nextProps;
-		// if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-    //   this.initComponent(nextProps);
-    // }
-    this.initComponent(nextProps);
+    //重新渲染数据获取selectedArray
+    if(!shallowEqual(nextProps.matchData,this.props.matchData)){
+      this.initComponent(nextProps);
+    }
+    
   }
 
   initComponent = (props) => {
     let {matchData=[],value,valueField} = props;
-    let valueMap = refValParse(value)
     this.setState({
-      checkedArray: matchData,
       selectedArray: matchData,
       showLoading: false,
       checkedKeys: matchData.map(item=>{
@@ -93,7 +87,7 @@ class RefTreeBaseUI extends Component {
   
   //  tree EventHandler
 	onCheck(selectedKeys, event) {
-		const { multiple } = this.props;
+		const { multiple} = this.props;
 		if(!multiple){
 			//单选
 			this.setState({
@@ -102,10 +96,11 @@ class RefTreeBaseUI extends Component {
 				onSaveCheckItems: [event.node.props.attr]
 			});
 		}else{
+      //多选
 			let { valueField } = this.props;
 			let allProcessCheckedArray = [].concat(this.state.selectedArray);
 			let key = event.node.props.attr[valueField];
-			let currentNode = event.node.props.attr;
+      let currentNode = event.node.props.attr;
 			if (event.checked) {
 				//新增操作
 				allProcessCheckedArray.push(currentNode)
@@ -114,7 +109,8 @@ class RefTreeBaseUI extends Component {
 				allProcessCheckedArray = allProcessCheckedArray.filter(item=>{
 				  return item[valueField] !== key
 				})
-			}
+      }
+     
 			this.setState({
 				selectedArray: allProcessCheckedArray,
 				checkedKeys: selectedKeys,
@@ -124,7 +120,6 @@ class RefTreeBaseUI extends Component {
 		}
 	}
 	onDoubleClick(selectedKeys, event) {
-		
 		const item = event.node.props;
 		const arr = [{ ...item.attr, refpk: item.eventKey, id: item.eventKey }]
 		this.setState({
@@ -134,7 +129,7 @@ class RefTreeBaseUI extends Component {
 			this.onClickBtn('save')
 		})
 	}
-
+  //单选
 	onSelect(selectedKeys, event) {
 		const { checkAllChildren, multiple } = this.props;
 		const eventKey = event.node.props.eventKey
@@ -186,10 +181,7 @@ class RefTreeBaseUI extends Component {
 			});
 		}
 	}
-  onSearchClick = (value) => {
-		this.props.getRefTreeData(value);
-	};
-	onSearchChange = (value) => {
+	onSearch = (value) => {
 		this.props.getRefTreeData(value);
 	};
 
@@ -241,8 +233,8 @@ class RefTreeBaseUI extends Component {
       treeData,
       theme= 'ref-red',
     } = this.props;
-    this.treeData = treeData;
     const { checkedKeys } = this.state;
+    console.log(checkedKeys,'checkedKeys')
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return (
       <Modal
@@ -261,17 +253,17 @@ class RefTreeBaseUI extends Component {
             <Loading  container={this.modalRef}  show={showLoading} />
             <RefCoreSearch
               show={searchable}
-              onSearch={this.onSearchClick}
-              onChange={this.onSearchChange}
+              onSearch={this.onSearch}
+              onChange={this.onSearch}
               language={lang}
             />
             {
-              this.treeData.length ?
+              treeData.length ?
                 <RefCoreTree
-                  show={Boolean(this.treeData.length)}
+                  show={Boolean(treeData.length)}
                   nodeKeys={(item) => item[valueField]}
                   displayField={nodeDisplay}
-                  data={this.treeData}
+                  data={treeData}
                   defaultExpandAll={lazyModal ? false : defaultExpandAll}
                   checkable={multiple}
                   multiple={multiple}
@@ -284,7 +276,7 @@ class RefTreeBaseUI extends Component {
                   showLine={showLine}
                   loadData={lazyModal ? this.props.onLoadData: null}
                 /> :
-                <RefCoreError show={!Boolean(this.treeData.length)} language={lang} />
+                <RefCoreError show={!Boolean(treeData.length)} language={lang} />
             }
           </Modal.Body>
           <Modal.Footer className={'ref-core-modal-footer'}>
