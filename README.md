@@ -51,7 +51,7 @@ backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显
 lang|`string`| `zh_CN` |多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN] | 否
 buttons|`object`| - |{buttons:{cancelText:'取消',clearText:'清空已选',okText:'确认'}} 按钮文字展示| 否
 emptyBut| `bool` | false| 清空按钮是否展示 |否
-checkStrictly| `bool` |false |  checkable状态下节点选择完全受控（父子节点选中状态不再关联）|否
+checkStrictly| `bool` |true |checkable状态下节点选择完全受控（父子节点选中状态不再关联）。checkStrictly=true性能更高，若checkStrictly取值为false，请注意matchData必须包含选中节点的所有子节点。|否
 multiple |`bool`| false |是否单选， true 多选，false 单选， 同时多选时不会有确认和取消按钮，多选时会出现复选框 | 否
 showLine | `bool` | false | 是否显示连接线 | 否
 searchable |`bool`|false |是否显示搜索框，弹出层是否带有搜索框，true 显示，false 不显示。 | 否

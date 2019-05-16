@@ -40,7 +40,7 @@ const defaultProps = {
 	multiple: false, //  默认单选
 	showLine: false, //  默认单选
 	defaultExpandAll: true,  // 数默认展开
-	checkStrictly: false,
+	checkStrictly: true,
 	lazyModal: false,
 	emptyBut: false,
 	onCancel: noop,
@@ -86,39 +86,75 @@ class RefTreeBaseUI extends Component {
   }
   
   //  tree EventHandler
-	onCheck(selectedKeys, event) {
-		const { multiple} = this.props;
-		if(!multiple){
-			//单选
-			this.setState({
-				selectedArray: [event.node.props.attr],
-				checkedKeys: [event.node.props.eventKey],
-				onSaveCheckItems: [event.node.props.attr]
-			});
-		}else{
+	//  tree EventHandler
+  onCheck(selectedKeys, event) {
+    const { multiple } = this.props;
+    if (!multiple) {
+      //单选
+      this.setState({
+        selectedArray: [event.node.props.attr],
+        checkedKeys: [event.node.props.eventKey],
+        onSaveCheckItems: [event.node.props.attr]
+      });
+    } else {
       //多选
-			let { valueField } = this.props;
-			let allProcessCheckedArray = [].concat(this.state.selectedArray);
-			let key = event.node.props.attr[valueField];
+      //多选
+      let { valueField, checkStrictly } = this.props;
+      let allProcessCheckedArray = [].concat(this.state.selectedArray);
+      let newCheckedKeys = this.state.checkedKeys
+      let key = event.node.props.attr[valueField];
       let currentNode = event.node.props.attr;
-			if (event.checked) {
-				//新增操作
-				allProcessCheckedArray.push(currentNode)
-			} else {
-				//删除操作
-				allProcessCheckedArray = allProcessCheckedArray.filter(item=>{
-				  return item[valueField] !== key
-				})
-      }
-     
-			this.setState({
-				selectedArray: allProcessCheckedArray,
-				checkedKeys: selectedKeys,
-				onSaveCheckItems: allProcessCheckedArray,
-			});
+      if (!checkStrictly) {
+        //下面涉及到checkStricly=false/true，涉及删除会多个删除，新增会新增多个
+        if (event.checked) {
+          //新增操作
+          event.checkedNodes.forEach(item => {
+            let curKey = item.props.attr[valueField];
+            if (newCheckedKeys.indexOf(curKey) < 0) {
+              allProcessCheckedArray.push(item.props.attr);
+              newCheckedKeys.push(item.props.attr[valueField])
+            }
+          });
+        } else {
+          //删除操作，涉及删除会多个删除
+          allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+            return item[valueField] !== key
+          });
+          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+          //下面是多个时候
+          event.halfCheckedKeys.forEach(parentKeys => {
+            allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+              return item[valueField] !== parentKeys
+            });
+            if (newCheckedKeys.indexOf(parentKeys) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(parentKeys), 1);
+          })
 
-		}
-	}
+        }
+      } else {
+        if (event.checked) {
+          //新增操作
+          allProcessCheckedArray.push(currentNode);
+          if (newCheckedKeys.indexOf(key) < 0) {
+            newCheckedKeys.push(key)
+          }
+        } else {
+          //删除操作
+          allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+            return item[valueField] !== key
+          });
+          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+
+        }
+      }
+      this.setState({
+        selectedArray: allProcessCheckedArray,
+        checkedKeys: newCheckedKeys,
+        onSaveCheckItems: allProcessCheckedArray,
+      });
+
+    }
+  }
+
 	onDoubleClick(selectedKeys, event) {
 		const item = event.node.props;
 		const arr = [{ ...item.attr, refpk: item.eventKey, id: item.eventKey }]
@@ -232,9 +268,9 @@ class RefTreeBaseUI extends Component {
       multiple,
       treeData,
       theme= 'ref-red',
+      modalProps={},
     } = this.props;
     const { checkedKeys } = this.state;
-    console.log(checkedKeys,'checkedKeys')
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return (
       <Modal
@@ -244,6 +280,7 @@ class RefTreeBaseUI extends Component {
         backdrop={backdrop}
         onHide={() => this.onClickBtn('cancel')}
         autoFocus={false}
+        {...modalProps}
       >
           <Modal.Header closeButton>
             <Modal.Title > {title} </Modal.Title>
@@ -274,6 +311,7 @@ class RefTreeBaseUI extends Component {
                   selectedKeys={checkedKeys}
                   checkStrictly={checkStrictly}
                   showLine={showLine}
+                  lazyModal={lazyModal}
                   loadData={lazyModal ? this.props.onLoadData: null}
                 /> :
                 <RefCoreError show={!Boolean(treeData.length)} language={lang} />
