@@ -70,7 +70,7 @@ valueField |``string``|'refpk' |指定真实数据的键。树节点key也是取
 
 ### RefTreeWithInput
 
-除了使用上述<RefTreeBaseUI/>的参数（showModal不可使用）还有以下参数。
+RefTreeWithInput可以使用RefTreeBaseUI的参数（除了showModal），还可以使用以下参数。
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---

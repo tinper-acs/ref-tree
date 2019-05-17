@@ -116,19 +116,23 @@ class RefTreeBaseUI extends Component {
             }
           });
         } else {
-          //删除操作，涉及删除会多个删除
-          allProcessCheckedArray = allProcessCheckedArray.filter(item => {
-            return item[valueField] !== key
-          });
-          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
-          //下面是多个时候
-          event.halfCheckedKeys.forEach(parentKeys => {
-            allProcessCheckedArray = allProcessCheckedArray.filter(item => {
-              return item[valueField] !== parentKeys
-            });
-            if (newCheckedKeys.indexOf(parentKeys) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(parentKeys), 1);
-          })
-
+          if(!event.node.props.attr.children || event.node.props.attr.children.length === 0){
+              //删除子节点操作，涉及删除会多个删除
+              allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+                return item[valueField] !== key
+              });
+              if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+              //下面是多个时候
+              event.halfCheckedKeys.forEach(parentKeys => {
+                allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+                  return item[valueField] !== parentKeys
+                });
+                if (newCheckedKeys.indexOf(parentKeys) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(parentKeys), 1);
+              })
+          }else{
+            //删除父节点，涉及遍历children节点，这里暂时不添加
+            return false;
+          }
         }
       } else {
         if (event.checked) {
