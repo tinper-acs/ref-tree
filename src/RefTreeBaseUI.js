@@ -67,10 +67,8 @@ class RefTreeBaseUI extends Component {
   }
  
   componentWillReceiveProps(nextProps) {
-    //重新渲染数据获取selectedArray
-    if(!shallowEqual(nextProps.matchData,this.props.matchData)){
-      this.initComponent(nextProps);
-    }
+    //重新渲染数据获取selectedArray,因为取消操作重置了selectedArray，需要初始化
+    if(nextProps.showModal)this.initComponent(nextProps);
     
   }
 
