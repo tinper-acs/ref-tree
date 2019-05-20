@@ -33,6 +33,7 @@ const propTypes = {
   multiple: PropTypes.bool, //  默认单选
   treeData: PropTypes.array,//接收树的数据
   onLoadData:PropTypes.func,
+  onTreeSelecting:PropTypes.func,
 };
 const defaultProps = {
   title: '弹窗标题',
@@ -50,7 +51,8 @@ const defaultProps = {
   valueField:'refpk',
   treeData:[],
   onLoadData:()=>{},
-  getRefTreeData:()=>{}
+  getRefTreeData:()=>{},
+  onTreeSelecting:()=>{},
 }
 class RefTreeBaseUI extends Component {
   constructor(props) {
@@ -152,6 +154,8 @@ class RefTreeBaseUI extends Component {
         selectedArray: allProcessCheckedArray,
         checkedKeys: newCheckedKeys,
         onSaveCheckItems: allProcessCheckedArray,
+      },()=>{
+        this.props.onTreeSelecting(allProcessCheckedArray,newCheckedKeys)
       });
 
     }
@@ -187,7 +191,9 @@ class RefTreeBaseUI extends Component {
 		if (ishaskey) {
 			this.setState({
 				checkedKeys: selectedKeys,
-			});
+			},()=>{
+        this.props.onTreeSelecting([],selectedKeys)
+      });
 			return false
 		}
 		if (!checkAllChildren) {
@@ -197,7 +203,9 @@ class RefTreeBaseUI extends Component {
 			this.setState({
 				selectedArray: arr,
 				checkedKeys: selectedKeys,
-			});
+			},()=>{
+        this.props.onTreeSelecting(arr,selectedKeys)
+      });
 		} else {
 			let arr = {}
 			event.selectedNodes.forEach((item) => {
@@ -216,7 +224,9 @@ class RefTreeBaseUI extends Component {
 				selectedArray: onSaveCheckItems,
 				checkedKeys: selectedKeys,
 				onSaveCheckItems: onSaveCheckItems
-			});
+			},()=>{
+        this.props.onTreeSelecting(onSaveCheckItems,selectedKeys)
+      });
 		}
 	}
 	onSearch = (value) => {
