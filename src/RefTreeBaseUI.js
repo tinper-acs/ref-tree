@@ -86,7 +86,7 @@ class RefTreeBaseUI extends Component {
   }
   
   //  tree EventHandler
-	//  tree EventHandler
+	//  多选才走这里
   onCheck(selectedKeys, event) {
     const { multiple } = this.props;
     if (!multiple) {
@@ -95,6 +95,8 @@ class RefTreeBaseUI extends Component {
         selectedArray: [event.node.props.attr],
         checkedKeys: [event.node.props.eventKey],
         onSaveCheckItems: [event.node.props.attr]
+      },()=>{
+        this.props.onTreeSelecting([event.node.props.attr],[event.node.props.eventKey])
       });
     } else {
       //多选
@@ -192,7 +194,7 @@ class RefTreeBaseUI extends Component {
 			this.setState({
 				checkedKeys: selectedKeys,
 			},()=>{
-        this.props.onTreeSelecting([],selectedKeys)
+        this.props.onTreeSelecting([event.node.props.attr],selectedKeys)
       });
 			return false
 		}
