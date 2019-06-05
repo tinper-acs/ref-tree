@@ -115,7 +115,6 @@ class Demo3 extends Component {
        
         this.setState({
             matchData:[],
-            random:Math.random()
         },()=>{
             this.props.form.setFieldsValue({tree3:''});
         })

@@ -81,7 +81,7 @@ placeholder|`string`| 空 |文本框的 placeholder | 否
 style| `object`| {width:200}| 文本框的style，默认宽度200px | 否 
 filterUrl| `string`|空|快捷录入接口。|否
 filterUrlFunc| `function(value)` | ()=>{} | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc | 否
-filertData| `Array`| [] | 必须配合filterUrlFunc使用，filterData是过滤列表全部数据| 否
+filterData| `Array`| [] | 必须配合filterUrlFunc使用，filterData是过滤列表全部数据| 否
 displayField |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式和过滤列表显示的内容格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
 value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值。使用的字段有限制，详情看注意事项。|否
 disabled|`bool`| false |禁用整个input框 | 否
@@ -93,12 +93,16 @@ canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录�
 
 ### 参数解析
 
+- input框的展示值
+
+    - input框的初始值，只从value的refname中获取
+    - 参照进行保存操作之后（点击参照确认按钮），input框展示由displayField来决定
+
 - value、displayField
   
     value和displayField是针对input框来说。
-
     value格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname字段不可变，refpk是该数据键，要求具有唯一性。
-    displayField确定input中显示内容的格式和过滤列表显示内容的格式。displayField中使用到的字段必须是filterUrlData,matchData和treeData数据项中都含有的字段。**displayField具体使用参考demo3**
+    displayField确定input中显示内容的格式和过滤列表显示内容的格式。displayField中使用到的字段必须是filterData,matchData和treeData数据项中都含有的字段。**displayField具体使用参考demo3**
 
 - value、valueFiled
   
