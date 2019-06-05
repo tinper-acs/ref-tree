@@ -16,7 +16,11 @@ class Demo3 extends Component {
         super();
         this.state = {
             treeData:[],
-            matchData:[],
+            matchData:[{name:'用友集团',refname:'用友集团',code:'001'},{name:'用友金融',refname:'用友金融',code:'2002'}],
+            value:JSON.stringify({
+                refname: "用友init,用友init",
+                refpk: "",  //value中指定的refpk要等于valueField对应的字段
+            }),
             filterData:[],
         }
     }
@@ -118,7 +122,7 @@ class Demo3 extends Component {
     }
     render() {
         const { getFieldProps, getFieldError } = this.props.form;
-        const {treeData,matchData,filterData} = this.state;
+        const {treeData,matchData,filterData,value} = this.state;
         return (
             <div className="demoPadding">
                 <RefTreeWithInput
@@ -127,7 +131,7 @@ class Demo3 extends Component {
                         return record.refname
                     }}
                     displayField={ (record) => {
-                        return record.name
+                        return `${record.name}-${record.code}`
                     }}  //显示内容的键
                     valueField={ 'code'}    //真实 value 的键
                     filterUrl={null}
@@ -139,7 +143,7 @@ class Demo3 extends Component {
                     treeData={treeData}
                     canClickGoOn={this.canClickGoOn}
                     {...getFieldProps('tree3', {
-                        initialValue:this.state.value,
+                        initialValue:value,
                         rules: [{
                             message: '请输入请选择', pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
                         }]
