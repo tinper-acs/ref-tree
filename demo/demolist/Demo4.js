@@ -1,7 +1,7 @@
 /**
  *
- * @title 基础示例3
- * @description 快捷录入和清空功能。快捷录入：在input是空的情况下，可以输入内容进行搜索; 清空功能：配合form表单使用
+ * @title 基础示例4
+ * @description 清空功能：不使用form表单
  *
  */
 
@@ -11,13 +11,13 @@ import '../../src/index.less'
 import { Button, Form } from 'tinper-bee';
 
 import request from './request';
-class Demo3 extends Component {
+class Demo4 extends Component {
     constructor() {
         super();
         this.state = {
+            value:'{"refname":"用友集团","refpk":"001"}',
             treeData:[],
-            matchData:[],
-            filterData:[],
+            matchData:[{name:'用友集团',refname:'用友集团',code:'001'}],
         }
     }
     componentDidMount(){
@@ -61,63 +61,31 @@ class Demo3 extends Component {
         });
         
     }
+    
     /**
-     * @msg: filterUrlFunc，快捷录入的回调函数
-     * @param {type} 
-     * @return: 
-     */
-    filterUrlFunc = (value) =>{
-        //模拟过滤数据
-        this.setState({
-            filterData:[
-                {
-                  "code": "asdas",
-                  "name": "asfasf",
-                  "pid": "44228a37-e97c-4347-8667-3aead5d1261b",
-                  "refcode": "asdas",
-                  "refpk": "a17df4c2-7b0c-4b26-ba0e-652c380c9f95",
-                  "id": "a17df4c2-7b0c-4b26-ba0e-652c380c9f95",
-                  "isLeaf": "true",
-                  "refname": "asfasf"
-                },
-                {
-                  "code": "bjfs",
-                  "name": "北京分公司",
-                  "pid": "44228a37-e97c-4347-8667-3aead5d1261b",
-                  "refcode": "bjfs",
-                  "refpk": "29fedd0a-9d3d-4690-b24d-4a2032cca349",
-                  "id": "29fedd0a-9d3d-4690-b24d-4a2032cca349",
-                  "isLeaf": "true",
-                  "refname": "北京分公司"
-                }],
-        })
-    }
-    /**
-     * @msg: 保存的回调函数
+     * @msg: 保存操作的回调
      * @param {type} 
      * @return: 
      */
     onSave = (result) =>{
+        console.log(result)
         this.setState({
             matchData:result,
         })
+    }
     /**
-     * @msg: 清空参照值的功能，就是value和matchData置空。前者对应input框，matchData对应树中选中的节点
-     * @param {type} 
+     * @msg: 清空操作
+     * @param {type} 此时value不可以直接传'',因为''下只能清除一次，第二次清除时前后value都是''，不会触发更新操作，
+     * 因此通过refpk不一致来触发更新操作
      * @return: 
      */
-    }
     clearFunc = () =>{
-       
         this.setState({
             matchData:[],
-            random:Math.random()
-        },()=>{
-            this.props.form.setFieldsValue({tree3:''});
+            value:`{"refname":"","refpk":"${Math.random()}"}`,
         })
     }
     render() {
-        const { getFieldProps, getFieldError } = this.props.form;
         const {treeData,matchData,filterData} = this.state;
         return (
             <div className="demoPadding">
@@ -127,31 +95,24 @@ class Demo3 extends Component {
                         return record.refname
                     }}
                     displayField={ (record) => {
-                        return record.name
+                        return record.code
                     }}  //显示内容的键
                     valueField={ 'code'}    //真实 value 的键
-                    filterUrl={null}
-                    filterData={filterData}
-                    filterUrlFunc={this.filterUrlFunc}
                     multiple={true}
                     onSave={this.onSave}
                     matchData={matchData}
                     treeData={treeData}
                     canClickGoOn={this.canClickGoOn}
-                    {...getFieldProps('tree3', {
-                        initialValue:this.state.value,
-                        rules: [{
-                            message: '请输入请选择', pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
-                        }]
-                    })}
+                    value={this.state.value}
                 >
                 </RefTreeWithInput>
                 <Button  
                     colors="primary"
                     onClick={this.clearFunc}>清空</Button>
+               
             </div>
         )
     }
 };
 
-export default Form.createForm()(Demo3);
+export default Demo4
