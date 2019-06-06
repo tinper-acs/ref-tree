@@ -105,12 +105,12 @@ class Demo3 extends Component {
         this.setState({
             matchData:result,
         })
+    }
     /**
      * @msg: 清空参照值的功能，就是value和matchData置空。前者对应input框，matchData对应树中选中的节点
      * @param {type} 
      * @return: 
      */
-    }
     clearFunc = () =>{
        
         this.setState({

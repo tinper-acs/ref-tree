@@ -86,7 +86,7 @@ class Demo4 extends Component {
         })
     }
     render() {
-        const {treeData,matchData,filterData} = this.state;
+        const {treeData,matchData,value} = this.state;
         return (
             <div className="demoPadding">
                 <RefTreeWithInput
@@ -103,7 +103,7 @@ class Demo4 extends Component {
                     matchData={matchData}
                     treeData={treeData}
                     canClickGoOn={this.canClickGoOn}
-                    value={this.state.value}
+                    value={value}
                 >
                 </RefTreeWithInput>
                 <Button  

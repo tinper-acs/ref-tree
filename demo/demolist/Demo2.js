@@ -17,6 +17,10 @@ class Demo2 extends Component {
         this.state = {
             treeData:[],
             matchData:[{name:'用友集团',refname:'用友集团',code:'001'}],
+            value:JSON.stringify({
+                refname: "用友集团",
+                refpk: "org1",  //value中指定的refpk要等于valueField对应的字段
+            })
         }
     }
     componentDidMount(){
@@ -74,7 +78,7 @@ class Demo2 extends Component {
     
     render() {
         const { getFieldProps, getFieldError } = this.props.form;
-        const {treeData,matchData,filterData} = this.state;
+        const {treeData,matchData,value} = this.state;
         return (
             <div className="demoPadding">
                 <RefTreeWithInput
@@ -92,10 +96,7 @@ class Demo2 extends Component {
                     treeData={treeData}
                     canClickGoOn={this.canClickGoOn}
                     {...getFieldProps('code1', {
-                        initialValue: JSON.stringify({
-                            refname: "用友集团",
-                            refpk: "org1",  //value中指定的refpk要等于valueField对应的字段
-                        }),
+                        initialValue: value,
                         rules: [{
                             message: '请输入请选择', pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
                         }]
