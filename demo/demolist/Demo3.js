@@ -44,7 +44,7 @@ class Demo3 extends Component {
           loading:true,
         })
         let ajax={
-            url: '/pap_basedoc/common-ref/blobRefTree',
+            url: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
         };
         let results = await request(ajax);
         let treeData = [];
@@ -134,7 +134,7 @@ class Demo3 extends Component {
                         return `${record.name}-${record.code}`
                     }}  //显示内容的键
                     valueField={ 'code'}    //真实 value 的键
-                    filterUrl={'/pap_basedoc/common-ref/blobRefTree'}
+                    filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree'}
                     filterData={filterData}
                     filterUrlFunc={this.filterUrlFunc}
                     multiple={true}

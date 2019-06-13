@@ -42,7 +42,8 @@ class Demo2 extends Component {
           loading:true,
         })
         let ajax={
-            url: '/pap_basedoc/common-ref/blobRefTree',
+            // url: 'http://mock-platform-prod.online.app.yyuap.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
+            url: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
         };
         let results = await request(ajax);
         let treeData = [];
@@ -90,7 +91,7 @@ class Demo2 extends Component {
                         return record.name
                     }}  //显示内容的键
                     valueField={ 'code'}    //真实 value 的键
-                    filterUrl={'/pap_basedoc/common-ref/blobRefTree'}
+                    filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree'}
                     searchValue={'org1'}
                     multiple={true}
                     onSave={this.onSave}
