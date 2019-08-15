@@ -1,3 +1,7 @@
+/*
+ * @Date: 2019-08-15 20:19:45
+ * @LastEditTime: 2019-08-15 20:25:11
+ */
 /**
  *
  * @title 基础示例2
@@ -83,7 +87,7 @@ class Demo2 extends Component {
         return (
             <div className="demoPadding">
                 <RefTreeWithInput
-                    emptyBut={true}
+                    emptyBut={false}
                     nodeDisplay={ (record) => {
                         return record.refname
                     }}
@@ -105,6 +109,7 @@ class Demo2 extends Component {
                             message: '请输入请选择', pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
                         }]
                     })}
+                    dropdownDisabled
                 >
                 </RefTreeWithInput>
                 <Button  
