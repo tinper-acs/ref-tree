@@ -241,7 +241,7 @@ class RefTreeBaseUI extends Component {
         searchValue
       })
     }else{
-      this.props.getRefTreeData(searchValue);
+      this.props.getRefTreeData(searchValue.trim());
     }
 	};
 
