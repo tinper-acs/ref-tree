@@ -103,6 +103,7 @@ class Demo2 extends Component {
                     treeData={treeData}
                     canClickGoOn={this.canClickGoOn}
                     treeNodeDisabledKey={'nodeDisabled'}
+                    treeNodeDisabledFunc={record=> !record['isLeaf']}
                     treeProps={{mustExpandable:true}}
                     selectorDisplay={'{refname}-{code}'}
                     {...getFieldProps('code1', {

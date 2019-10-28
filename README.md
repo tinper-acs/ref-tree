@@ -76,7 +76,9 @@ treeProps | `object`| {} | tree上其他属性，具体接收的参数参照bee-
 onTreeSelecting|`function(selectedArray,selectedKeys)` | --| 树节点选中回调，selectedArray全部选中数据，selectedKeys选中选中数据的键| 否
 isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用函数getRefTreeData(value),true是前端搜索 | 否
 treeNodeDisabledKey | `String` | - | 树节点中disabled状态节点，传入代表treeData中表示不可选节点的键 | 否
+treeNodeDisabledFunc| `function`| -| return false或者true，指定树节点是否可选。true表示不可以选择，false表示可选择。优先级高于treeNodeDisabledKey| fasle 
 footerBtnDom | `dom` | <span></span> | 自定义footer的按钮dom | 否
+
 
 
 ### RefTreeWithInput
