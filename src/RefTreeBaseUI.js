@@ -5,8 +5,7 @@ import RefCoreError from 'ref-core/lib/refs/RefCoreError';
 import RefCoreTree from 'ref-core/lib/refs/RefCoreTree';
 import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
 import RefCoreButton from 'ref-core/lib/refs/RefCoreButton';
-import Loading from 'bee-loading';
-import Modal from 'bee-modal';
+import { Spin, Modal } from "@tinper/next-ui"
 import shallowEqual from "shallowequal";
 const noop = () => {
 };
@@ -355,7 +354,7 @@ class RefTreeBaseUI extends Component {
       <Modal
         show={showModal}
         size="sm"
-        className={`${theme} ${className} ref-core  ref-core-modal ref-tree`}
+        wrapClassName={`${theme} ${className} ref-core ref-core-modal ref-tree`}
         backdrop={backdrop}
         onHide={() => this.onClickBtn('cancel')}
         autoFocus={false}
@@ -366,7 +365,7 @@ class RefTreeBaseUI extends Component {
           </Modal.Header >
 
           <Modal.Body ref={(ref)=>this.modalRef = ref}>
-            <Loading  container={this.modalRef}  show={showLoading} />
+            <Spin getPopupContainer={this.modalRef} spinning={showLoading} />
             <RefCoreSearch
               show={searchable}
               onSearch={this.onSearch}

@@ -14,7 +14,7 @@ module.exports = webpackMerge(baseConfig, {
   entry: {
     app: path.join(__dirname, '../src/index.js'),
   },
-  externals:['react','react-dom','prop-types','tinper-bee','ref-core'],
+  externals:['react','react-dom','prop-types','@tinper/next-ui','ref-core'],
   output: {
       filename: 'index.js',
       path: path.join(__dirname, '../dist'),

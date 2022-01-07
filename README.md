@@ -72,8 +72,8 @@ matchData | `Array` | [] | 选中的节点，选中节点只从matchData中获�
 theme| `String` | -- | 让theme=''并且引入项目样式文件，实现参照样式与项目样式保持一致。否则，不需要操作theme| 否
 getRefTreeData|`function(value)` | --| 搜索的回调方法，value是搜索值| 否
 valueField |`string`|'refpk' |指定真实数据的键。树节点key也是取valueField指定值 | 否
-modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
-treeProps | `object`| {} | tree上其他属性，具体接收的参数参照bee-tree| 否
+modalProps | `object`| {} | modal上其他属性，具体接收的参数参照modal| 否
+treeProps | `object`| {} | tree上其他属性，具体接收的参数参照tree| 否
 onTreeSelecting|`function(selectedArray,selectedKeys)` | --| 树节点选中回调，selectedArray全部选中数据，selectedKeys选中选中数据的键| 否
 isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用函数getRefTreeData(value),true是前端搜索 | 否
 footerBtnDom | `dom` | <span></span> | 自定义footer的按钮dom | 否

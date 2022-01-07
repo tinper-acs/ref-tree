@@ -16,6 +16,11 @@ module.exports = {
       containers: path.resolve(__dirname, "src/containers/")
     }
   },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM",
+    "@tinper/next-ui": "TinperNext"
+  },
   module: {
     rules: [
       // {
@@ -33,9 +38,7 @@ module.exports = {
       {
         test: /.js$/,
         loader: 'babel-loader',
-        exclude: [
-          path.join(__dirname, '../node_modules')
-        ]
+        exclude: /node_modules/
       },
       
       {
