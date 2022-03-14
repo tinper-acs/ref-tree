@@ -1,6 +1,6 @@
 {
   "name": "ref-tree",
-  "version": "3.0.2-ghpages",
+  "version": "3.0.2-ghpages.1",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
