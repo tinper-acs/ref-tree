@@ -109,7 +109,7 @@ gulp.task("change_dist",["less_component"], function() {
 gulp.task("move_ghpages", function () {
   gulp
     .src([
-      path.join(process.cwd(), "./ghpages"),
+      path.join(process.cwd(), "./ghpages/*"),
   ])
     .pipe(gulp.dest("./ghpages"));
   console.log("###### ghpages done ######");
