@@ -106,6 +106,15 @@ gulp.task("change_dist",["less_component"], function() {
   console.log("###### change_dist done ######");
 });
 
+gulp.task("move_ghpages", function () {
+  gulp
+    .src([
+      path.join(process.cwd(), "./ghpages"),
+  ])
+    .pipe(gulp.dest("./ghpages"));
+  console.log("###### ghpages done ######");
+})
+
 gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
