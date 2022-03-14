@@ -113,8 +113,7 @@ gulp.task("move_ghpages", function () {
   ])
     .pipe(gulp.dest("./ghpages"));
   console.log("###### ghpages done ######");
-})
-
+});
 gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
