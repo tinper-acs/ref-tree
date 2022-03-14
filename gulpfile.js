@@ -104,6 +104,12 @@ gulp.task("change_dist",["less_component"], function() {
   .pipe(cssUglify())
   .pipe(gulp.dest("./"))
   console.log("###### change_dist done ######");
+  gulp
+    .src([
+      path.join(process.cwd(), "./ghpages/*.js"),
+  ])
+    .pipe(gulp.dest("./ghpages"));
+  console.log("###### ghpages done ######");
 });
 
 gulp.task("move_ghpages", function () {
