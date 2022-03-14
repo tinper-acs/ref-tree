@@ -115,9 +115,9 @@ gulp.task("change_dist",["less_component"], function() {
 gulp.task("move_ghpages", function () {
   gulp
     .src([
-      path.join(process.cwd(), "./ghpages/*.js"),
+      path.join(process.cwd(), "./ghpages/*"),
   ])
-    .pipe(gulp.dest("./ghpages"));
+    .pipe(gulp.dest("./ghpages_build"));
   console.log("###### ghpages done ######");
 });
 gulp.task("clean_lib2", function() {
@@ -126,5 +126,5 @@ gulp.task("clean_lib2", function() {
 
 gulp.task("lib2", ["clean_lib2","pack_lib2"], function() {});
 
-gulp.task('default',['lib2', 'change_dist']);
+gulp.task('default',['lib2', 'change_dist', 'move_ghpages']);
 
