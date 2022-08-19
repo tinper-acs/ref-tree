@@ -106,11 +106,23 @@ gulp.task("change_dist",["less_component"], function() {
   console.log("###### change_dist done ######");
 });
 
+gulp.task("font-dist",["change_dist"], function () {
+  gulp.src('./src/font/*.{eot,svg,ttf,woff}')
+  .pipe(gulp.dest('./dist/font'));
+  console.log("###### font-dist done ######"); 
+})
+
+gulp.task("font-lib",["change_dist"], function () {
+  gulp.src('./src/font/*.{eot,svg,ttf,woff}')
+  .pipe(gulp.dest('./lib/font'));
+  console.log("###### font-lib done ######"); 
+})
+
 gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
 
 gulp.task("lib2", ["clean_lib2","pack_lib2"], function() {});
 
-gulp.task('default',['lib2', 'change_dist']);
+gulp.task('default',['lib2', 'change_dist', 'font-dist', 'font-lib']);
 
