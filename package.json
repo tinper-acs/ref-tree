@@ -1,6 +1,6 @@
 {
   "name": "ref-tree",
-  "version": "3.0.2-beta.0",
+  "version": "3.0.2-beta.1",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -111,7 +111,7 @@
     "prop-types": "^15.6.0"
   },
   "dependencies": {
-    "ref-core": "^2.0.0",
+    "ref-core": "^2.0.2",
     "shallowequal": "^1.1.0"
   }
 }

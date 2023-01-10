@@ -346,7 +346,8 @@ class RefTreeBaseUI extends Component {
       treeNodeDisabledKey,
       treeProps={},
       footerBtnDom='',
-      searchPlaceholder
+      searchPlaceholder,
+      fieldid
     } = this.props;
     const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
@@ -359,12 +360,13 @@ class RefTreeBaseUI extends Component {
         onHide={() => this.onClickBtn('cancel')}
         autoFocus={false}
         {...modalProps}
+        fieldid={fieldid ? fieldid + '_modal' : undefined}
       >
-          <Modal.Header closeButton>
-            <Modal.Title > {title} </Modal.Title>
+          <Modal.Header closeButton fieldid={fieldid ? fieldid + '_modal_header' : undefined}>
+            <Modal.Title fieldid={fieldid ? fieldid + '_modal_title' : undefined}> {title} </Modal.Title>
           </Modal.Header >
 
-          <Modal.Body ref={(ref)=>this.modalRef = ref}>
+          <Modal.Body ref={(ref)=>this.modalRef = ref} fieldid={fieldid ? fieldid + '_modal_body' : undefined}>
             <Spin getPopupContainer={this.modalRef} spinning={showLoading} />
             <RefCoreSearch
               show={searchable}
@@ -372,6 +374,7 @@ class RefTreeBaseUI extends Component {
               onChange={this.onSearch}
               language={lang}
               placeholder={searchPlaceholder}
+              fieldid={fieldid ? fieldid + '_refcoresearch' : undefined}
             />
             {
               treeData.length ?
@@ -395,12 +398,13 @@ class RefTreeBaseUI extends Component {
                   loadData={lazyModal ? this.props.onLoadData: null}
                   searchValue={isLocalSearch?searchValue:''}
                   treeNodeDisabledKey={treeNodeDisabledKey}
+                  fieldid={fieldid ? fieldid + '_refcoretree' : undefined}
                 /> :
-                <RefCoreError show={!Boolean(treeData.length)} language={lang} />
+                <RefCoreError show={!Boolean(treeData.length)} language={lang} fieldid={fieldid ? fieldid + '_refcoreerror' : undefined} />
             }
           </Modal.Body>
-          <Modal.Footer className={'ref-core-modal-footer'}>
-            <RefCoreButton language={lang} onClickBtn={this.onClickBtn} buttons={buttons} emptyBut={emptyBut} footerBtnDom={footerBtnDom}/>
+          <Modal.Footer className={'ref-core-modal-footer'} fieldid={fieldid ? fieldid + '_modal_footer' : undefined}>
+            <RefCoreButton fieldid={fieldid ? fieldid + '_refcorebutton' : undefined} language={lang} onClickBtn={this.onClickBtn} buttons={buttons} emptyBut={emptyBut} footerBtnDom={footerBtnDom}/>
           </Modal.Footer>
       </Modal>
     );
