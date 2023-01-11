@@ -111,7 +111,7 @@
     "prop-types": "^15.6.0"
   },
   "dependencies": {
-    "ref-core": "^2.0.2",
+    "ref-core": "^2.0.3",
     "shallowequal": "^1.1.0"
   }
 }
