@@ -347,7 +347,8 @@ class RefTreeBaseUI extends Component {
       treeProps={},
       footerBtnDom='',
       searchPlaceholder,
-      fieldid
+      fieldid,
+      nodataText
     } = this.props;
     const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
@@ -400,7 +401,7 @@ class RefTreeBaseUI extends Component {
                   treeNodeDisabledKey={treeNodeDisabledKey}
                   fieldid={fieldid ? fieldid + '_refcoretree' : undefined}
                 /> :
-                <RefCoreError show={!Boolean(treeData.length)} language={lang} fieldid={fieldid ? fieldid + '_refcoreerror' : undefined} />
+                <RefCoreError show={!Boolean(treeData.length)} nodataText={nodataText} language={lang} fieldid={fieldid ? fieldid + '_refcoreerror' : undefined} />
             }
           </Modal.Body>
           <Modal.Footer className={'ref-core-modal-footer'} fieldid={fieldid ? fieldid + '_modal_footer' : undefined}>
